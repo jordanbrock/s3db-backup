@@ -12,7 +12,7 @@ class S3dbBackup
     aws = YAML::load_file(File.join(Rails.root, "config", "s3_config.yml"))
     config = ActiveRecord::Base.configurations[RAILS_ENV]
 
-    mysqldump = `which mysqldump`.strip
+    mysqldump = "/usr/local/bin/mysqldump"
     raise "Please make sure that 'mysqldump' is installed and in your path!" if mysqldump.empty?
     
     gzip = `which gzip`.strip
