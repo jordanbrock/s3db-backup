@@ -12,13 +12,16 @@ class S3dbBackup
     aws = YAML::load_file(File.join(Rails.root, "config", "s3_config.yml"))
     config = ActiveRecord::Base.configurations[RAILS_ENV]
 
+    #mysqldump = `which mysqldump`.strip
     mysqldump = "/usr/local/bin/mysqldump"
     raise "Please make sure that 'mysqldump' is installed and in your path!" if mysqldump.empty?
     
-    gzip = `which gzip`.strip
+    #gzip = `which gzip`.strip
+    gzip = "/usr/bin/gzip"
     raise "Please make sure that 'gzip' is installed and in your path!" if gzip.empty?
 
-    ccrypt = `which ccrypt`.strip
+    #ccrypt = `which ccrypt`.strip
+    ccrypt = "/usr/local/bin/ccrypt"
     raise "Please make sure that 'ccrypt' is installed and in your path!" if ccrypt.empty?
     
     raise "Please specify a bucket for your #{RAILS_ENV} environment in config/s3config.yml" if aws[RAILS_ENV].nil?
